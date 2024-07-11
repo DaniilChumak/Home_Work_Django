@@ -16,7 +16,6 @@ class Category(models.Model):
         ordering = ('id',)
 
 
-
 class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование', help_text='Введите наименование')
     description = models.TextField(verbose_name='Описание', help_text='Добавьте описание')
@@ -26,7 +25,7 @@ class Product(models.Model):
     price = models.FloatField(verbose_name='Стоимость товара', help_text='Укажите стоимость товара')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    manufactured_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.name
