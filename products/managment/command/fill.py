@@ -1,7 +1,7 @@
 import json
 
 from django.core.management import BaseCommand
-import json
+
 from products.models import Category, Product
 
 
@@ -9,12 +9,12 @@ class Command(BaseCommand):
 
     @staticmethod
     def json_read_categories():
-        with open('catalog.json', encoding="utf-8") as file:
+        with open('products_data.json', encoding="utf-8") as file:
             return json.load(file)
 
     @staticmethod
     def json_read_products():
-        with open('catalog.json', encoding="utf-8") as file:
+        with open('products_data.json', encoding="utf-8") as file:
             return json.load(file)
 
     def handle(self, *args, **options):
