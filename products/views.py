@@ -1,5 +1,6 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
-from products.models import Product
+from products.models import Product, Version
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
@@ -37,3 +38,24 @@ class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('product:product_list')
 
+
+class VersionDetailView(DetailView):
+    model = Version
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = Product.objects.get(pk=self.object.product.pk)
+        context['product'] = product
+        return context
+
+
+class VersionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Version
+    success_url = 'catalog/index.html'
+    login_url = 'users:users_login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = Product.objects.get(pk=self.object.product.pk)
+        context['product'] = product
+        return context
